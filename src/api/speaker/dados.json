@@ -1,0 +1,20 @@
+{
+    "id": "speaker",
+    "nome": "Speaker",
+    "preco": 300,
+    "descricao": "Todas estas questões, devidamente ponderadas, levantam dúvidas sobre se a necessidade de renovação processual causa impacto indireto na reavaliação do orçamento setorial.",
+    "estoque": 3,
+    "img": "./api/speaker/speaker-foto.jpg",
+    "reviews": [
+        {
+            "nome": "Marcelo",
+            "estrelas": 5,
+            "descricao": "Produto maravilhoso !!!"
+        },
+         {
+             "nome": "Carmem",
+             "estrelas": 4,
+             "descricao": "Amei, mas demorou muito pra chegar"
+         }
+    ]
+}
