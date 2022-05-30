@@ -1,5 +1,10 @@
 <template>
   <div class="home">
+    <modal-component>
+      <template #body>
+        <!-- <h3>Taiza</h3> -->
+      </template>
+    </modal-component>
     <menu-component />
     <section class="produtos">
       <produto-card
@@ -20,6 +25,7 @@ import ProdutoCard from "@/components/ProdutoCard.vue";
 import smartwatch from "../api/smartwatch/smartwatch.jpg";
 import smartphone from "../api/smartphone/smartphone.jpg";
 import MenuComponent from "@/components/MenuComponent.vue";
+import ModalComponent from "@/components/ModalComponent.vue";
 
 export default {
   name: "HomeView",
@@ -62,6 +68,7 @@ export default {
   components: {
     ProdutoCard,
     MenuComponent,
+    ModalComponent,
   },
 };
 </script>
