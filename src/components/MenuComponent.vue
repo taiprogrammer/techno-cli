@@ -3,8 +3,9 @@
     <div class="spacing">
       <img class="logo" src="@/assets/techno.svg" alt="Techno" />
       <div class="carrinho-menu">
-        <img src="@/assets/carrinho.svg" alt="" @click="getCart" />
-        {{ getCartLength }}
+        <img src="@/assets/carrinho.svg" alt="" />
+        <!-- @click="getCart" -->
+        <!-- {{ getCartLength }} -->
       </div>
     </div>
   </header>

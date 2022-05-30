@@ -1,8 +1,11 @@
 <template>
   <div class="home">
-    <modal-component>
+    <modal-component
+      v-if="showModalProduct"
+      @closeModal="showModalProduct = false"
+    >
       <template #body>
-        <!-- <h3>Taiza</h3> -->
+        <product-component :produto="selectedProduct" @add="addItem" />
       </template>
     </modal-component>
     <menu-component />
@@ -11,6 +14,7 @@
         v-for="produto in produtos"
         :key="`produto_${produto.id}`"
         :produto="produto"
+        @getProduto="getProduto(produto)"
       />
     </section>
   </div>
@@ -22,10 +26,16 @@ import tablet from "../api/tablet/tablet.jpg";
 import speaker from "../api/speaker/speaker.jpg";
 import notebook from "../api/notebook/notebook.jpg";
 import ProdutoCard from "@/components/ProdutoCard.vue";
+import tablet_detail from "../api/tablet/tablet-foto.jpg";
 import smartwatch from "../api/smartwatch/smartwatch.jpg";
 import smartphone from "../api/smartphone/smartphone.jpg";
 import MenuComponent from "@/components/MenuComponent.vue";
 import ModalComponent from "@/components/ModalComponent.vue";
+import speaker_detail from "../api/speaker/speaker-foto.jpg";
+import notebook_detail from "../api/notebook/notebook-foto.jpg";
+import ProductComponent from "@/components/ProductComponent.vue";
+import smartwatch_detail from "../api/smartwatch/smartwatch-foto.jpg";
+import smartphone_detail from "../api/smartphone/smartphone-foto.jpg";
 
 export default {
   name: "HomeView",
@@ -37,38 +47,160 @@ export default {
           nome: "Notebook",
           preco: 2999,
           img: notebook,
+          detalhes: {
+            id: "notebook",
+            nome: "Notebook",
+            preco: 2999,
+            descricao:
+              "Todas estas questões, devidamente ponderadas, levantam dúvidas sobre se a necessidade de renovação processual causa impacto indireto na reavaliação do orçamento setorial.",
+            estoque: 12,
+            img: notebook_detail,
+            reviews: [
+              {
+                nome: "Fábio",
+                estrelas: 5,
+                descricao:
+                  "Gostei muito do produto, atendeu todas as minhas necessidades",
+              },
+              {
+                nome: "Nathália",
+                estrelas: 4,
+                descricao:
+                  "Produto muito bom, mas poderia ser um pouco mais barato.",
+              },
+            ],
+          },
         },
         {
           id: "smartphone",
           nome: "Smartphone",
           preco: 1299,
           img: smartphone,
+          detalhes: {
+            id: "smartphone",
+            nome: "Smartphone",
+            preco: 1299,
+            descricao:
+              "Todas estas questões, devidamente ponderadas, levantam dúvidas sobre se a necessidade de renovação processual causa impacto indireto na reavaliação do orçamento setorial.",
+            estoque: 3,
+            img: smartphone_detail,
+            reviews: [
+              {
+                nome: "Rogério",
+                estrelas: 5,
+                descricao:
+                  "Gostei muito do produto, atendeu todas as minhas necessidades.",
+              },
+              {
+                nome: "Maria",
+                estrelas: 5,
+                descricao: "Perfeito",
+              },
+            ],
+          },
         },
         {
           id: "tablet",
           nome: "Tablet",
           preco: 899,
           img: tablet,
+          detalhes: {
+            id: "tablet",
+            nome: "Tablet",
+            preco: 899,
+            descricao:
+              "Todas estas questões, devidamente ponderadas, levantam dúvidas sobre se a necessidade de renovação processual causa impacto indireto na reavaliação do orçamento setorial.",
+            estoque: 5,
+            img: tablet_detail,
+            reviews: [
+              {
+                nome: "Anita",
+                estrelas: 4,
+                descricao: "Amei, só a cor que é diferente da foto",
+              },
+              {
+                nome: "Ana",
+                estrelas: 3,
+                descricao: "Não era bem o que esperava",
+              },
+            ],
+          },
         },
         {
           id: "smartwatch",
           nome: "Smartwatch",
           preco: 200,
           img: smartwatch,
+          detalhes: {
+            id: "smartwatch",
+            nome: "Smartwatch",
+            preco: 200,
+            descricao:
+              "Todas estas questões, devidamente ponderadas, levantam dúvidas sobre se a necessidade de renovação processual causa impacto indireto na reavaliação do orçamento setorial.",
+            estoque: 3,
+            img: smartwatch_detail,
+            reviews: [
+              {
+                nome: "Rogério",
+                estrelas: 5,
+                descricao:
+                  "Gostei muito do produto, atendeu todas as minhas necessidades.",
+              },
+              {
+                nome: "Maria",
+                estrelas: 5,
+                descricao: "Perfeito",
+              },
+            ],
+          },
         },
         {
           id: "speaker",
           nome: "Speaker",
           preco: 300,
           img: speaker,
+          detalhes: {
+            id: "speaker",
+            nome: "Speaker",
+            preco: 300,
+            descricao:
+              "Todas estas questões, devidamente ponderadas, levantam dúvidas sobre se a necessidade de renovação processual causa impacto indireto na reavaliação do orçamento setorial.",
+            estoque: 3,
+            img: speaker_detail,
+            reviews: [
+              {
+                nome: "Marcelo",
+                estrelas: 5,
+                descricao: "Produto maravilhoso !!!",
+              },
+              {
+                nome: "Carmem",
+                estrelas: 4,
+                descricao: "Amei, mas demorou muito pra chegar",
+              },
+            ],
+          },
         },
       ],
+      showModalProduct: false,
+      selectedProduct: null,
     };
+  },
+  methods: {
+    getProduto(produto) {
+      this.showModalProduct = true;
+      this.selectedProduct = produto;
+      console.log(produto);
+    },
+    addItem() {
+      console.log(this.selectedProduct);
+    },
   },
   components: {
     ProdutoCard,
     MenuComponent,
     ModalComponent,
+    ProductComponent,
   },
 };
 </script>

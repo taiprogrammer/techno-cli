@@ -99,6 +99,7 @@ fade-enter-active,
     border-radius: 4px;
   }
 }
+
 .close-modal {
   font-size: 40px;
   color: #000;

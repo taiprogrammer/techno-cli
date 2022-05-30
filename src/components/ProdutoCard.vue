@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     getProduto() {
-      this.$emit("getProduto", this.produto.id);
+      this.$emit("getProduto");
     },
   },
   filters: {
