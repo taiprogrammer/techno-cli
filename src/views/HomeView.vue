@@ -8,7 +8,14 @@
         <product-component :produto="selectedProduct" @add="addItem" />
       </template>
     </modal-component>
-    <menu-component />
+    <modal-component
+      v-if="showModalCart"
+      @closeModal="showModalCart = false"
+    ></modal-component>
+    <menu-component
+      :getCartLength="carrinho.length"
+      @getCart="showModalCart = true"
+    />
     <section class="produtos">
       <produto-card
         v-for="produto in produtos"
@@ -182,8 +189,10 @@ export default {
           },
         },
       ],
-      showModalProduct: false,
+      carrinho: new Array(),
       selectedProduct: null,
+      showModalProduct: false,
+      showModalCart: false,
     };
   },
   methods: {
@@ -193,7 +202,18 @@ export default {
       console.log(produto);
     },
     addItem() {
-      console.log(this.selectedProduct);
+      this.carrinho.push(this.selectedProduct);
+      this.selectedProduct.detalhes.estoque--;
+    },
+    checkLocalStorage() {
+      if (window.localStorage.carrinho) {
+        this.carrinho = JSON.parse(window.localStorage.carrinho);
+      }
+    },
+  },
+  watch: {
+    carrinho() {
+      window.localStorage.carrinho = JSON.stringify(this.carrinho);
     },
   },
   components: {
