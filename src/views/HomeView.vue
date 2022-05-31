@@ -8,10 +8,11 @@
         <product-component :produto="selectedProduct" @add="addItem" />
       </template>
     </modal-component>
-    <modal-component
-      v-if="showModalCart"
-      @closeModal="showModalCart = false"
-    ></modal-component>
+    <modal-component v-if="showModalCart" @closeModal="showModalCart = false">
+      <template #body>
+        <cart-card :carrinho="carrinho" />
+      </template>
+    </modal-component>
     <menu-component
       :getCartLength="carrinho.length"
       @getCart="showModalCart = true"
@@ -36,8 +37,9 @@
 // @ is an alias to /src
 import tablet from "../api/tablet/tablet.jpg";
 import speaker from "../api/speaker/speaker.jpg";
+import CartCard from "@/components/CartCard.vue";
 import notebook from "../api/notebook/notebook.jpg";
-import ProdutoCard from "@/components/ProdutoCard.vue";
+import ProdutoCard from "@/components/ProductCard.vue";
 import tablet_detail from "../api/tablet/tablet-foto.jpg";
 import smartwatch from "../api/smartwatch/smartwatch.jpg";
 import smartphone from "../api/smartphone/smartphone.jpg";
@@ -206,7 +208,6 @@ export default {
     getProduto(produto) {
       this.showModalProduct = true;
       this.selectedProduct = produto;
-      console.log(produto);
     },
     addItem() {
       const toast = document.getElementById("alerta");
@@ -237,7 +238,11 @@ export default {
       window.localStorage.carrinho = JSON.stringify(this.carrinho);
     },
   },
+  created() {
+    this.checkLocalStorage();
+  },
   components: {
+    CartCard,
     ProdutoCard,
     MenuComponent,
     ModalComponent,

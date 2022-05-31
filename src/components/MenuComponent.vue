@@ -4,7 +4,7 @@
       <img class="logo" src="@/assets/techno.svg" alt="Techno" />
       <div class="carrinho-menu">
         <img src="@/assets/carrinho.svg" @click="getCart" />
-        {{ getCartLength + 1 }}
+        {{ getCartLength }}
       </div>
     </div>
   </header>
