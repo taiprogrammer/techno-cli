@@ -47,7 +47,7 @@ fade-enter-active,
   position: fixed;
   top: 0px;
   left: 0px;
-  z-index: 5000;
+  z-index: 1;
   padding: 0 10px 0 10px;
 }
 
@@ -85,7 +85,6 @@ fade-enter-active,
 
 .modal__body {
   width: 100%;
-  /* flex: 1; */
   overflow: auto;
   overflow-x: hidden;
   &__product {

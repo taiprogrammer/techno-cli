@@ -1,5 +1,5 @@
 <template>
-  <div class="alerta" id="alerta">
+  <div class="alerta">
     <div class="alerta-content">
       <img class="alerta-imagem" src="../assets/correct.png" alt="" />
       <p class="alerta-mensagem">{{ mensagemAlerta }}</p>
@@ -27,7 +27,7 @@ export default {
 <style lang="scss" scoped>
 .alerta {
   position: absolute;
-  top: 20px;
+  top: 50px;
   right: 5vw;
   padding: 20px 65px 20px 25px;
   text-align: center;
@@ -56,19 +56,7 @@ export default {
   cursor: pointer;
 }
 
-.ativo {
-  animation: fadeInDown 0.3s forwards;
-}
-
-@keyframes fadeInDown {
-  from {
-    transform: translate3d(0, -30px, 0);
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0px, 0);
-  }
+.alerta-mensagem {
+  margin-top: 5px;
 }
 </style>

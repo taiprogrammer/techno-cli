@@ -24,6 +24,11 @@
         @getProduto="getProduto(produto)"
       />
     </section>
+    <toast-component
+      id="alerta"
+      :mensagemAlerta="message"
+      @closeToast="closeToast"
+    />
   </div>
 </template>
 
@@ -38,6 +43,7 @@ import smartwatch from "../api/smartwatch/smartwatch.jpg";
 import smartphone from "../api/smartphone/smartphone.jpg";
 import MenuComponent from "@/components/MenuComponent.vue";
 import ModalComponent from "@/components/ModalComponent.vue";
+import ToastComponent from "@/components/ToastComponent.vue";
 import speaker_detail from "../api/speaker/speaker-foto.jpg";
 import notebook_detail from "../api/notebook/notebook-foto.jpg";
 import ProductComponent from "@/components/ProductComponent.vue";
@@ -193,6 +199,7 @@ export default {
       selectedProduct: null,
       showModalProduct: false,
       showModalCart: false,
+      message: null,
     };
   },
   methods: {
@@ -202,8 +209,22 @@ export default {
       console.log(produto);
     },
     addItem() {
+      const toast = document.getElementById("alerta");
+      toast.classList.add("ativo");
+      toast.style.display = "block";
       this.carrinho.push(this.selectedProduct);
       this.selectedProduct.detalhes.estoque--;
+      this.message = "Item adicionado";
+      this.closeToastInstantly();
+    },
+    closeToast() {
+      const toast = document.getElementById("alerta");
+      toast.style.display = "none";
+    },
+    closeToastInstantly() {
+      setInterval(() => {
+        document.getElementById("alerta").style.display = "none";
+      }, 3500);
     },
     checkLocalStorage() {
       if (window.localStorage.carrinho) {
@@ -220,14 +241,32 @@ export default {
     ProdutoCard,
     MenuComponent,
     ModalComponent,
+    ToastComponent,
     ProductComponent,
   },
 };
 </script>
 <style lang="scss" scoped>
+/* @import "@/assets/style/style.scss"; */
 .produtos {
   max-width: 900px;
   margin: 80px auto 0 auto;
   padding-bottom: 1.563rem;
+}
+
+.ativo {
+  animation: fadeInDown 0.3s forwards;
+}
+
+@keyframes fadeInDown {
+  from {
+    transform: translate3d(0, -30px, 0);
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0px, 0);
+  }
 }
 </style>
