@@ -4,10 +4,7 @@
       <transition name="fade">
         <div id="content" class="modal__box-content">
           <div class="modal-header">
-            <div>
-              <slot name="header"></slot>
-              <div @click="close" class="close-modal">&times;</div>
-            </div>
+            <div @click="close" class="close-modal">&times;</div>
           </div>
           <div class="modal__body__product__cart">
             <slot name="body"></slot>

@@ -5,16 +5,21 @@
       @closeModal="showModalProduct = false"
     >
       <template #body>
-        <product-component :produto="selectedProduct" @add="addItem" />
+        <product-component
+          v-background-modal
+          :produto="selectedProduct"
+          @add="addItem"
+        />
       </template>
     </modal-component>
-    <modal-component
-      v-background-white
-      v-if="showModalCart"
-      @closeModal="showModalCart = false"
-    >
+    <modal-component v-if="showModalCart" @closeModal="showModalCart = false">
       <template #body>
-        <cart-card :carrinho="carrinho" @remove="removeItem" />
+        <cart-card
+          :carrinho="carrinho"
+          @remove="removeItem"
+          @continue="proceed"
+        />
+        <address-card />
       </template>
     </modal-component>
     <menu-component
@@ -44,6 +49,7 @@ import speaker from "../api/speaker/speaker.jpg";
 import CartCard from "@/components/CartCard.vue";
 import notebook from "../api/notebook/notebook.jpg";
 import ProdutoCard from "@/components/ProductCard.vue";
+import AddressCard from "@/components/AddressCard.vue";
 import tablet_detail from "../api/tablet/tablet-foto.jpg";
 import smartwatch from "../api/smartwatch/smartwatch.jpg";
 import smartphone from "../api/smartphone/smartphone.jpg";
@@ -213,6 +219,12 @@ export default {
       this.showModalProduct = true;
       this.selectedProduct = produto;
     },
+    proceed() {
+      const content_card = document.getElementById("content-cart");
+      const content_address = document.getElementById("content-address");
+      content_card.style.display = "none";
+      content_address.style.display = "block";
+    },
     addItem() {
       const toast = document.getElementById("alerta");
       toast.classList.add("ativo");
@@ -250,6 +262,7 @@ export default {
   },
   components: {
     CartCard,
+    AddressCard,
     ProdutoCard,
     MenuComponent,
     ModalComponent,

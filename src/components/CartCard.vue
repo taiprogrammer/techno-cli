@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-dados-carrinho">
+  <div class="modal-dados-carrinho" id="content-cart">
     <div class="card-item" v-for="(item, index) in carrinho" :key="item.id">
       <div class="item-details">
         <img :src="item.detalhes.img" />
@@ -16,6 +16,7 @@
       />
     </div>
     <h4 class="total-price-cart">Total: {{ getTotalPrice | priceNumber }}</h4>
+    <button class="modal-btn" @click="proceed">Prosseguir com a compra</button>
   </div>
 </template>
 <script>
@@ -32,6 +33,9 @@ export default {
   methods: {
     removeItemFromCart(index) {
       this.$emit("remove", index);
+    },
+    proceed() {
+      this.$emit("continue");
     },
   },
   computed: {
@@ -106,5 +110,17 @@ export default {
 
 .product-name {
   margin-left: 15px;
+}
+
+.modal-btn {
+  margin-bottom: 40px;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 4px;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
 }
 </style>
