@@ -2,7 +2,7 @@
   <div class="modal-dados-carrinho">
     <div class="card-item" v-for="(item, index) in carrinho" :key="item.id">
       <div class="item-details">
-        <img :src="item.img" />
+        <img :src="item.detalhes.img" />
         <div class="product-name">
           <p>{{ item.nome }}</p>
           <b>{{ item.preco | priceNumber }}</b>
@@ -15,7 +15,7 @@
         @click="removeItemFromCart(index)"
       />
     </div>
-    <h4 class="total-price-cart">Total: {{ getTotalPrice }}</h4>
+    <h4 class="total-price-cart">Total: {{ getTotalPrice | priceNumber }}</h4>
   </div>
 </template>
 <script>
@@ -27,6 +27,21 @@ export default {
       default() {
         return new Array();
       },
+    },
+  },
+  methods: {
+    removeItemFromCart(index) {
+      this.$emit("remove", index);
+    },
+  },
+  computed: {
+    getTotalPrice() {
+      const price = this.carrinho.map((item) => item.preco);
+      const totalPrice = price.reduce(
+        (previous, current) => previous + current,
+        0
+      );
+      return totalPrice;
     },
   },
   filters: {
@@ -55,10 +70,14 @@ export default {
   max-width: 600px;
   width: 500px;
   box-shadow: 0 0 2rem rgba(0, 0, 0, 0.2);
-  padding: 10px;
   margin-top: 15px;
   justify-content: space-between;
   position: relative;
+}
+
+.item-details img {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
 }
 
 .card-item img {
@@ -70,6 +89,10 @@ export default {
   align-items: center;
 }
 
+.item-details img {
+  width: 100px;
+}
+
 .excluir-item {
   height: 1.25rem;
   position: absolute;
@@ -78,9 +101,10 @@ export default {
 }
 .total-price-cart {
   margin-top: 20px;
+  padding-bottom: 20px;
 }
 
 .product-name {
-  margin-left: 10px;
+  margin-left: 15px;
 }
 </style>

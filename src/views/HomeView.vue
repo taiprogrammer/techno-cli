@@ -10,7 +10,7 @@
     </modal-component>
     <modal-component v-if="showModalCart" @closeModal="showModalCart = false">
       <template #body>
-        <cart-card :carrinho="carrinho" />
+        <cart-card :carrinho="carrinho" @remove="removeItem" />
       </template>
     </modal-component>
     <menu-component
@@ -217,6 +217,9 @@ export default {
       this.selectedProduct.detalhes.estoque--;
       this.message = "Item adicionado";
       this.closeToastInstantly();
+    },
+    removeItem(index) {
+      this.carrinho.splice(index, 1);
     },
     closeToast() {
       const toast = document.getElementById("alerta");
