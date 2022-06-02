@@ -8,7 +8,11 @@
         <product-component :produto="selectedProduct" @add="addItem" />
       </template>
     </modal-component>
-    <modal-component v-if="showModalCart" @closeModal="showModalCart = false">
+    <modal-component
+      v-background-white
+      v-if="showModalCart"
+      @closeModal="showModalCart = false"
+    >
       <template #body>
         <cart-card :carrinho="carrinho" @remove="removeItem" />
       </template>

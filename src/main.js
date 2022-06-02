@@ -4,6 +4,12 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
+Vue.directive("background-white", {
+  bind(el, binding, vnode) {
+    el.style.background = "#fff";
+  },
+});
+
 Vue.config.productionTip = false;
 
 new Vue({
