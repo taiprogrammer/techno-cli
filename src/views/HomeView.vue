@@ -19,7 +19,7 @@
           @remove="removeItem"
           @continue="proceed"
         />
-        <address-card />
+        <address-card @send="sendAddress" />
       </template>
     </modal-component>
     <menu-component
@@ -212,9 +212,14 @@ export default {
       showModalProduct: false,
       showModalCart: false,
       message: null,
+      address: new Array(),
     };
   },
   methods: {
+    sendAddress(address) {
+      this.address.push(address);
+      console.log(this.address);
+    },
     getProduto(produto) {
       this.showModalProduct = true;
       this.selectedProduct = produto;
@@ -250,11 +255,17 @@ export default {
       if (window.localStorage.carrinho) {
         this.carrinho = JSON.parse(window.localStorage.carrinho);
       }
+      if (window.localStorage.address) {
+        this.address = JSON.parse(window.localStorage.address);
+      }
     },
   },
   watch: {
     carrinho() {
       window.localStorage.carrinho = JSON.stringify(this.carrinho);
+    },
+    address() {
+      window.localStorage.address = JSON.stringify(this.address);
     },
   },
   created() {

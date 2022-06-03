@@ -59,6 +59,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+#content-cart {
+  margin: 1.875rem 15.625rem;
+}
 .modal-dados-carrinho {
   max-width: 600px;
   display: flex;
