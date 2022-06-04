@@ -2,6 +2,9 @@
   <header class="header">
     <div class="spacing">
       <img class="logo" src="@/assets/techno.svg" alt="Techno" />
+      <div v-if="verifyAddress" @click="open" class="address">
+        Endereços cadastrados
+      </div>
       <div class="carrinho-menu">
         <img src="@/assets/carrinho.svg" @click="getCart" />
         {{ getCartLength }}
@@ -18,6 +21,15 @@ export default {
   methods: {
     getCart() {
       this.$emit("getCart");
+    },
+    open() {
+      this.$emit("getAddresses");
+    },
+  },
+  computed: {
+    verifyAddress() {
+      const addresses = window.localStorage.address;
+      return addresses.length > 2;
     },
   },
 };
@@ -44,6 +56,10 @@ export default {
 .carrinho-menu {
   display: flex;
   align-items: center;
+  cursor: pointer;
+}
+
+.address {
   cursor: pointer;
 }
 </style>

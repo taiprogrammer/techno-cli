@@ -22,9 +22,18 @@
         <address-card @send="sendAddress" />
       </template>
     </modal-component>
+    <modal-component
+      v-if="showModalAddresses"
+      @closeModal="showModalAddresses = false"
+    >
+      <template #body>
+        <addresses-card :addresses="addresses" @removeAddress="remove" />
+      </template>
+    </modal-component>
     <menu-component
       :getCartLength="carrinho.length"
       @getCart="showModalCart = true"
+      @getAddresses="showModalAddresses = true"
     />
     <section class="produtos">
       <produto-card
@@ -49,11 +58,12 @@ import speaker from "../api/speaker/speaker.jpg";
 import CartCard from "@/components/CartCard.vue";
 import notebook from "../api/notebook/notebook.jpg";
 import ProdutoCard from "@/components/ProductCard.vue";
-import AddressCard from "@/components/AddressCard.vue";
+import AddressCard from "@/components/AddAddressCard.vue";
 import tablet_detail from "../api/tablet/tablet-foto.jpg";
 import smartwatch from "../api/smartwatch/smartwatch.jpg";
 import smartphone from "../api/smartphone/smartphone.jpg";
 import MenuComponent from "@/components/MenuComponent.vue";
+import AddressesCard from "@/components/AddressesCard.vue";
 import ModalComponent from "@/components/ModalComponent.vue";
 import ToastComponent from "@/components/ToastComponent.vue";
 import speaker_detail from "../api/speaker/speaker-foto.jpg";
@@ -211,14 +221,23 @@ export default {
       selectedProduct: null,
       showModalProduct: false,
       showModalCart: false,
+      showModalAddresses: false,
       message: null,
-      address: new Array(),
+      addresses: new Array(),
     };
   },
   methods: {
     sendAddress(address) {
-      this.address.push(address);
-      console.log(this.address);
+      const toast = document.getElementById("alerta");
+      this.addresses.push(address);
+      toast.classList.add("ativo");
+      toast.style.display = "block";
+      this.message = "Endereço cadastrado com sucesso";
+      this.showModalCart = false;
+      this.closeToastInstantly();
+    },
+    remove(index) {
+      this.addresses.splice(index, 1);
     },
     getProduto(produto) {
       this.showModalProduct = true;
@@ -256,7 +275,7 @@ export default {
         this.carrinho = JSON.parse(window.localStorage.carrinho);
       }
       if (window.localStorage.address) {
-        this.address = JSON.parse(window.localStorage.address);
+        this.addresses = JSON.parse(window.localStorage.address);
       }
     },
   },
@@ -264,8 +283,8 @@ export default {
     carrinho() {
       window.localStorage.carrinho = JSON.stringify(this.carrinho);
     },
-    address() {
-      window.localStorage.address = JSON.stringify(this.address);
+    addresses() {
+      window.localStorage.address = JSON.stringify(this.addresses);
     },
   },
   created() {
@@ -276,6 +295,7 @@ export default {
     AddressCard,
     ProdutoCard,
     MenuComponent,
+    AddressesCard,
     ModalComponent,
     ToastComponent,
     ProductComponent,

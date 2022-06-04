@@ -34,6 +34,7 @@ export default {
       rua: undefined,
       bairro: undefined,
       numero: undefined,
+      localidade: undefined,
     };
   },
   methods: {
@@ -43,6 +44,7 @@ export default {
         .then((cep) => {
           this.rua = cep.logradouro;
           this.bairro = cep.bairro;
+          this.localidade = cep.localidade;
         });
     },
     sendAddress(address) {
@@ -51,6 +53,7 @@ export default {
         rua: this.rua,
         bairro: this.bairro,
         numero: this.numero,
+        localidade: this.localidade,
       };
       this.$emit("send", address);
     },
@@ -60,7 +63,8 @@ export default {
 <style lang="scss" scoped>
 #content-address {
   display: none;
-  padding: 1.875rem 15.625rem;
+  max-width: 500px;
+  margin: 1.875rem 21.625rem;
 }
 
 h3 {
@@ -76,17 +80,14 @@ h3 {
 }
 
 input {
-  max-width: 350px;
+  max-width: 400px;
   height: 35px;
-  padding: 0 1rem;
+  padding: 0 15px;
   border: none;
   border-radius: 4px;
   outline: 0px solid rgba(26, 26, 26, 0.219);
-  background-color: #fff;
-  font-size: 0.875rem;
+  font-size: 0.865rem;
   box-shadow: 0 4px 10px rgba(26, 26, 26, 0.219);
-  appearance: none;
-  transition: 50ms;
   margin-top: 10px;
 }
 

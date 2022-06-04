@@ -1,7 +1,7 @@
 <template>
   <div class="alerta">
     <div class="alerta-content">
-      <img class="alerta-imagem" src="../assets/correct.png" alt="" />
+      <img class="alerta-imagem" src="../assets/correct.png" />
       <p class="alerta-mensagem">{{ mensagemAlerta }}</p>
       <img
         class="alerta-close"
@@ -26,7 +26,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .alerta {
-  position: absolute;
+  position: fixed;
   top: 50px;
   right: 5vw;
   padding: 20px 65px 20px 25px;
