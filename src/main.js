@@ -34,6 +34,14 @@ Vue.directive("address", {
   },
 });
 
+Vue.directive("card-address", {
+  bind(el, binding) {
+    el.style.padding = "15px";
+    el.style.border = "1px solid #141414";
+    el.style.borderRadius = "4px";
+  },
+});
+
 Vue.config.productionTip = false;
 
 new Vue({

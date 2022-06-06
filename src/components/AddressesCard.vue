@@ -6,7 +6,7 @@
       v-for="(address, key) in addresses"
       :key="`address_${key}`"
     >
-      <div class="card-addresses">
+      <div class="card-addresses" v-card-address>
         <div class="info">
           <div class="container-row">
             <p>Rua: {{ address.rua }},</p>
