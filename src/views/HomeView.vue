@@ -303,7 +303,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-/* @import "@/assets/style/style.scss"; */
 .produtos {
   max-width: 900px;
   margin: 80px auto 0 auto;

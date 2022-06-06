@@ -28,6 +28,12 @@ Vue.directive("background-modal", {
   },
 });
 
+Vue.directive("address", {
+  bind(el, binding) {
+    el.style.fontWeight = "700";
+  },
+});
+
 Vue.config.productionTip = false;
 
 new Vue({

@@ -2,7 +2,7 @@
   <header class="header">
     <div class="spacing">
       <img class="logo" src="@/assets/techno.svg" alt="Techno" />
-      <div v-if="verifyAddress" @click="open" class="address">
+      <div v-if="verifyAddress" @click="open" class="address" v-address>
         Endereços cadastrados
       </div>
       <div class="carrinho-menu">
