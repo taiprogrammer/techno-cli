@@ -21,8 +21,8 @@
       <ul>
         <li
           class="avaliacao"
-          v-for="avaliacao in produto.detalhes.reviews"
-          :key="`avaliacao${avaliacao.id}`"
+          v-for="(avaliacao, key) in produto.detalhes.reviews"
+          :key="key"
         >
           <p class="avaliacao-descricao">{{ avaliacao.descricao }}</p>
           <p class="avaliacao-usuario">

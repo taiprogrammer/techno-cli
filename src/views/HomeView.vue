@@ -5,11 +5,7 @@
       @closeModal="showModalProduct = false"
     >
       <template #body>
-        <product-component
-          v-background-modal
-          :produto="selectedProduct"
-          @add="addItem"
-        />
+        <product-component :produto="selectedProduct" @add="addItem" />
       </template>
     </modal-component>
     <modal-component v-if="showModalCart" @closeModal="showModalCart = false">
